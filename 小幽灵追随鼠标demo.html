@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<title>Examples</title>
+		<meta name="description" content="">
+		<meta name="keywords" content="">
+		<link href="" rel="stylesheet">
+		<style type="text/css">
+			*{
+				margin: 0;
+				padding: 0;
+			}
+			body{
+				position: relative;
+				background: #90c0f1;
+				overflow: hidden;
+			}
+			#ghost{
+				width:80px;
+				height:110px;
+				position: absolute;
+				background: #fff;
+				border-radius: 50% 50% 0 0;
+				top: 300px;
+				left: 50%;
+			}
+			.ghostEye{
+				width: 10px;
+				height: 15px;
+				border-radius: 50%;
+				background: #061e74;
+				box-shadow: inset -2px -2px #fff;
+				position: absolute;
+				top: 30px;
+				border: 2px solid #061e74;
+			}
+			.left{
+				left: 20px;
+			}
+			.right{
+				right:20px;
+			}
+			.ghostMouth{
+				width: 10px;
+				height: 20px;
+				border: 2px solid #061e74;
+				border-radius: 30% 30% 50% 50%;
+				position: absolute;
+				left: 35px;
+				top: 60px;
+			}
+			.ghostWave{
+				width: 80px;
+				height: 8px;
+				background-size: 16px 8px;
+				background-image: radial-gradient(circle at 50% 0%,#fff,71%,transparent 71%);
+				position: absolute;
+				left: 0;bottom: -8px;
+				animation: ghostWave 1s linear infinite;
+			}
+			@keyframes ghostWave{
+				100%{background-position: -16px 0;}
+			}
+		</style>
+	</head>
+	<body>
+	    <div id="ghost">
+	    	<div class="ghostEye left"></div>
+	    	<div class="ghostEye right"></div>
+	    	<div class="ghostMouth"></div>
+	    	<div class="ghostWave"></div>
+	    </div>
+	    <script type="text/javascript">
+	    	window.onload = function(){
+	    		var oGhost = document.getElementById("ghost");
+	    		window.onmousemove = function(ev){
+	    			var oEvent = ev||event;
+	    			var aEyes = getClass(oGhost,"div","ghostEye");
+	    			var targetL = oEvent.clientX>=40?oEvent.clientX-40:0;;
+	    			var targetT= oEvent.clientY>=55?oEvent.clientY-55:0;;
+    				var timer = setTimeout(function(){
+	    				var oShadowY = "",oShadowX = "";//眼睛看哪呢~
+	    				if(oEvent.clientX<(oGhost.offsetLeft+40)){
+	    					oShadowX = "-2px";
+	    				}else if(oEvent.clientX>(oGhost.offsetLeft+40)){
+	    					oShadowX = "2px";
+	    				}else{
+	    					oShadowX = "0px";
+	    				}
+	    				if(oEvent.clientY<(oGhost.offsetTop+55)){
+	    					oShadowY = "-2px";
+	    				}else{
+	    					oShadowY = "2px";
+	    				}
+	    				aEyes[0].style.boxShadow = "inset "+oShadowX+" "+oShadowY+" #fff";
+	    				aEyes[1].style.boxShadow = "inset "+oShadowX+" "+oShadowY+" #fff";
+	    				oGhost.style.left = targetL+"px";
+	    				oGhost.style.top = targetT+"px";
+	    				clearTimeout(timer);
+	    			},500);
+	    			
+	    		}
+	    		function getClass(parent,tagName,sClass){
+					var aAll = parent.getElementsByTagName(tagName);
+					var arr = [];
+					for(var i = 0; i < aAll.length; i ++){
+						var aClass = aAll[i].className.split(" ");	//将元素的className转换成数组，包含所有className
+						for(var j = 0; j < aClass.length; j ++){
+							if(aClass[j]==sClass){
+								arr.push(aAll[i]);
+								break;		
+							}
+						}
+					}
+					return arr;
+				}
+	    	}
+	    </script>
+	</body>
+</html>
