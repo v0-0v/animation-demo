@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		.box{
+			width: 800px;
+			height: 500px;
+			background: #90c0f1;
+			margin: 50px auto;
+			position: relative;
+		}
+		#ball{
+			width: 80px;
+			height: 80px;
+			border-radius: 50%;
+			background: radial-gradient(circle at 100px 100px, #ccc, #000);
+			position: absolute;
+		}
+	</style>
+</head>
+<body>   
+	<div class="box">
+		<div id="ball"></div>
+	</div>
+	<script>
+		var oBall = document.getElementById("ball");
+		oBall.style.left = Math.random()*720+"px";
+		oBall.style.top = Math.random()*420+"px";
+		sport(500);
+		function sport(v){//参数为球运动的速度
+			var vX = Math.random()*v*(Math.random()>0.5?1:-1);
+			var vY = Math.sqrt(Math.pow(v,2)-Math.pow(vX,2))*(Math.random()>0.5?1:-1);
+			setInterval(function(){
+				var disLeft = vX*1/60+oBall.offsetLeft;
+				var disTop = vY*1/60+oBall.offsetTop;
+				if(disLeft<=0){
+					disLeft=0-disLeft;
+					vX=0-vX;
+				}else if(disLeft>=720){
+					disLeft=1440-disLeft;
+					vX=0-vX;
+				}
+				if(disTop<=0){
+					disTop=0-disTop;
+					vY=0-vY;
+				}else if(disTop>=420){
+					disTop=840-disTop;
+					vY=0-vY;
+				}
+				oBall.style.left = disLeft+"px";
+				oBall.style.top = disTop+"px";
+			},1000/60);	
+		}
+	</script>
+</body>
+</html>
