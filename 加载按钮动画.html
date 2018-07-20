@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style type="text/css">
+		.btnBox{
+			width: 200px;
+			height: 40px;
+			background-color: #1E90FF;
+			margin: 300px auto 0;
+			border-radius: 20px;
+		}
+		.box{
+			width: 30px;
+			height: 40px;
+			margin: 0 auto;
+			padding: 17px 0;
+			box-sizing: border-box;
+			display: flex;
+			justify-content: space-around;
+		}
+		.box span{
+			width: 5px;
+			height: 5px;
+			border-radius: 50%;
+			background-color: #fff;
+			opacity: .5;
+			transform-origin: bottom center;
+		}
+		.one{
+			animation: wave .8s linear 0s infinite;
+		}
+		.two{
+			animation: wave .8s linear .12s infinite;
+		}
+		.three{
+			animation: wave .8s linear .24s infinite;
+		}
+		@keyframes wave{
+			10%{transform: translateY(0) scale(1.2, .8);}
+			25%{transform: scale(.8, 1.2);}
+			35%{transform: translateY(-5px);}
+			50%{opacity: 1;}
+			65%{transform: translateY(-5px) scale(1, 1);}
+			80%{transform: scale(.8, 1.2);}
+			90%{transform: translateY(0) scale(1.2, .8);}
+			100%{opacity: .5;transform: translateY(0) scale(1, 1);}
+		}
+	</style>
+</head>
+<body>
+	<div class="btnBox">
+		<div class="box">
+			<span class="one"></span>
+			<span class="two"></span>
+			<span class="three"></span>
+		</div>
+	</div>
+</body>
+</html>
